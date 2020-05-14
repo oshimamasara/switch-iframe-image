@@ -1,0 +1,31 @@
+<!-- iframe test 、 local では https にならないので❌ -->
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style>
+            body{
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 2rem;}
+        </style>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+    <body>
+        <div id="check-me">HTML内をチェック！</div>
+
+        <iframe src="https://codepen.io"></iframe>
+
+        <script>
+            if($('iframe').length>0){
+                console.log('iframe あり');
+            } else{
+                console.log('iframe なし');
+            }
+
+            // OK Chrome, Safari
+            // ×  FireFox
+        </script>
+    </body>
+</html>
