@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style>
+            body{
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 2rem;}
+        </style>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+    <body>
+        <iframe src="https://codepen.io"></iframe>
+        <iframe height="auto" style="width: 300px;" scrolling="no" title="Screwing a little ;)" src="https://codepen.io/oshimamasara/embed/qBOjzPz?height=265&theme-id=dark&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true"> See the Pen <a href='https://codepen.io/oshimamasara/pen/qBOjzPz'>Screwing a little ;)</a> by Takayuki Oshima(<a href='https://codepen.io/oshimamasara'>@oshimamasara</a>) on <a href='https://codepen.io'>CodePen</a>.</iframe>
+        <iframe width="300" height="auto" src="https://www.youtube.com/embed/MF8ukTZRRB4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://wordpress.com"></iframe>
+        <script>
+            var links = [];
+            $('iframe').each(function(){
+              links.push(this.src);
+              console.log(links);
+            })
+        </script>
+    </body>
+</html>
