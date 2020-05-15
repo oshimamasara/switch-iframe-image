@@ -1,10 +1,3 @@
-<!-- 
-    checked iframe error 
-    https://stackoverflow.com/questions/7950184/is-there-a-client-side-way-to-detect-x-frame-options
-    iframe の読み込み成功したら onload に時間かかる、それを setTimeout で振り分け
-    500 - 600 ms がちょうど良さそう
-    document.body.appendChild() は必要、 X-Frame の場合は読み込まれないのでロード時間にあまり影響しない
--->
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -29,31 +22,37 @@
             
             setTimeout(function() {  // 0.5s 経ったらトリガー
                 timepast = true;
-            },550);
+            },500);
 
-            var counter = 0;
+            //var counter = 0;
+            var x = 0;
             $('iframe').each(function(){
                 //console.log(this.src);
                 this.onload = function(){
+                    
                     if(timepast) {
-                        console.log(String(counter)+"番目のループ"); // ループ 4回してからログが読み込まれる様子
+                        //console.log(String(counter)+"番目のループ"); // ループ 4回してからログが読み込まれる様子
                         console.log(this.src + "\n**** 3 It's PROBABLY OK");
                         console.log(timepast);
                     }
                     else{
-                        console.log(String(counter)+"番目のループ");
+                        //console.log(String(counter)+"番目のループ");
                         console.log(this.src + "\n**** 4 It's PROBABLY NOT OK");
                         console.log(timepast);
                         this.remove();
-                        var img = '<img src="https://pythonchannel.com/static/images/twitter_search_app/17.jpg" style="max-width:150px"' + 'alt="' + String(counter) + '">';
-                        $("div").html(img);
+                        var img = '<img src="https://pythonchannel.com/static/images/twitter_search_app/17.jpg" style="max-width:150px;float:left"' + 'alt="' + String(x) + '番目のiframeが × なので代替画像"><p style="height:150px;padding:1.5rem;font-size:0.8rem;">CodePen.io などの外部サイト読み込みに失敗！<br>こちらの<a href="' + this.src + '">リンク</a>より内容確認お願いします。</p>';
+                        //$("div").html(img); // 全部の div 内の iframe が変わる
+                        $("div").eq(x).html(img);
                         console.log('⭐️Replace!'); // iframeの数だけ画像が出る
                     }
+                    console.log('No:'+String(x));  // 順番どおり
+                    //console.log('No--' + String(counter));  // 常に 4
+                    x++;
                 };
                 
                 document.body.appendChild(this);
-                console.log(counter);
-                counter++;
+                //console.log(counter);
+                //counter++;
             })
         </script>
     </body>
