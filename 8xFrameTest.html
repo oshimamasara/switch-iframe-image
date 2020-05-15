@@ -1,0 +1,57 @@
+<!-- 
+    checked iframe error 
+    https://stackoverflow.com/questions/7950184/is-there-a-client-side-way-to-detect-x-frame-options
+    iframe の読み込み成功したら onload に時間かかる、それを setTimeout で振り分け
+    500 - 600 ms がちょうど良さそう
+    document.body.appendChild() は必要、 X-Frame の場合は読み込まれないのでロード時間にあまり影響しない
+-->
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style>
+            body{
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 2rem;}
+        </style>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+    <body>
+        <iframe src="https://google.com"></iframe>
+        <iframe height="auto" style="width: 300px;" scrolling="no" title="Screwing a little ;)" src="https://codepen.io/oshimamasara/embed/qBOjzPz?height=265&theme-id=dark&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true"> See the Pen <a href='https://codepen.io/oshimamasara/pen/qBOjzPz'>Screwing a little ;)</a> by Takayuki Oshima(<a href='https://codepen.io/oshimamasara'>@oshimamasara</a>) on <a href='https://codepen.io'>CodePen</a>.</iframe>
+        <iframe width="300" height="auto" src="https://www.youtube.com/embed/MF8ukTZRRB4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://wordpress.com"></iframe>
+        <script>
+            var timepast=false; 
+            var links = [];
+            
+            setTimeout(function() {  // 0.5s 経ったらトリガー
+                timepast = true;
+            },550);
+
+            $('iframe').each(function(){
+                console.log(this.src);
+
+                this.onload = function(){
+                    if(timepast) {
+                        console.log(this.src + "\n**** 3 It's PROBABLY OK");
+                        console.log(timepast);
+                    }
+                    else{
+                        console.log(this.src + "\n**** 4 It's PROBABLY NOT OK");
+                        console.log(timepast);
+                    }
+                };
+                
+                document.body.appendChild(this);
+
+
+                links.push(this.src);
+                //console.log(links);
+
+            })
+        </script>
+    </body>
+</html>
