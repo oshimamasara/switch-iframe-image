@@ -10,3 +10,8 @@
 
 + 未対策　https://pythonchannel.com/static/images/codecamp/2getElement.html
 + 本コードで対策した場合　https://pythonchannel.com/static/images/codecamp/10iframeToImage.html
+
+## Change Code
+
++ line 25 : time  500  -->
++ line 45 : html tag  div -->
